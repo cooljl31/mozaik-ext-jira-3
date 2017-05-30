@@ -22,8 +22,8 @@ const client = mozaik => {
 	};
 	const buildApiRequest = (path, user, pwd, params) =>{
 		var basic_url = config.get('jira.host')+'rest/agile/';
-		var api_version = config.get('jira.apiversion');
-		var urlStr = basic_url + api_version+ '/'+path + '?maxResults=250';
+		var api_version = 'latest';
+		var urlStr = basic_url + api_version + '/'+path + '?maxResults=250';
 		var req = request.get(urlStr).auth(user, pwd);
 		mozaik.logger.info('request sent to jira is :' + urlStr);
 		return req.promise();
@@ -53,12 +53,12 @@ const client = mozaik => {
 
 		for(var i = 0; i<res.body.issues.length;i++){
 			var num = res.body.issues[i].fields;
-			if(typeof num.customfield_10005 !== 'undefined' && num.customfield_10005 !== null && num.status.name === "Done"){
+			if(typeof num.customfield_10006 !== 'undefined' && num.customfield_10006 !== null && num.status.name === "Done"){
 				if (num.issuetype.name === 'Bug'){
-					bugCompleted += num.customfield_10005;
+					bugCompleted += num.customfield_10006;
 
 				}
-				spCompleted += num.customfield_10005;
+				spCompleted += num.customfield_10006;
 
 	  	}
 		}
@@ -80,12 +80,12 @@ const client = mozaik => {
 		var totalPoints = 0;
 		for(var i = 0; i<res.body.issues.length; i++){
 			var fields = res.body.issues[i].fields;
-			if(typeof fields.customfield_10005 !== 'undefined'){
-				totalPoints += fields.customfield_10005;
+			if(typeof fields.customfield_10006 !== 'undefined'){
+				totalPoints += fields.customfield_10006;
 				if(fields.status.name === "Done"){
 					singleObj['id'] = res.body.issues[i].id;
 					singleObj['resolutionDate'] = new Date(Date.parse(fields.resolutiondate));
-					singleObj['storyPoints'] = fields.customfield_10005;
+					singleObj['storyPoints'] = fields.customfield_10006;
 					burnDownObj.push(singleObj);
 					console.log(singleObj);
 					singleObj = {};
