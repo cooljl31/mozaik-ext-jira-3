@@ -508,6 +508,12 @@ c3-windows@0.4.11-rc4:
   dependencies:
     d3 "^3.5.6"
 
+c3@^0.4.12:
+  version "0.4.12"
+  resolved "https://registry.yarnpkg.com/c3/-/c3-0.4.12.tgz#58f6250c2b5925b61a930a7b7b383fb8f58f623f"
+  dependencies:
+    d3 "~3.5.0"
+
 chalk@1.1.3, chalk@^1.1.0:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/chalk/-/chalk-1.1.3.tgz#a8115c55e4a702fe4d150abd3872822a7e09fc98"
@@ -576,7 +582,7 @@ core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
-d3@^3.5.6:
+d3@^3.5.6, d3@~3.5.0:
   version "3.5.17"
   resolved "https://registry.yarnpkg.com/d3/-/d3-3.5.17.tgz#bc46748004378b21a360c9fc7cf5231790762fb8"
 
