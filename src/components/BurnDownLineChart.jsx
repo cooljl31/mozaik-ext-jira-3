@@ -10,13 +10,11 @@ class BurnDownLineChart extends Component {
         this.state = { results: [] };
     }
     getApiRequest() {
-        let { usr, pwd, boardID } = this.props;
+        let { boardID } = this.props;
         var chartType = 'burndown';
         return {
             id:     `jira.board.${ boardID }`,
             params: {
-                usr:      usr,
-                pwd:      pwd,
                 boardID:  boardID,
                 type: chartType
             }
@@ -28,7 +26,7 @@ class BurnDownLineChart extends Component {
         this.setState({ results: _.clone(results[0]) });
     }
     render() {
-        let { usr,pwd,boardID } = this.props;
+        let { boardID } = this.props;
         let { results }            = this.state;
         // converts to format required by BarChart component
         //var newArray = results.filter(function(e){return e});
@@ -66,8 +64,6 @@ class BurnDownLineChart extends Component {
     }
 }
 BurnDownLineChart.propTypes = {
-    usr:      PropTypes.string.isRequired,
-    pwd:      PropTypes.string.isRequired,
     boardID:  PropTypes.string.isRequired
 };
 reactMixin(BurnDownLineChart.prototype, ListenerMixin);

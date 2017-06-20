@@ -13,14 +13,12 @@ class VelocityPieChart extends Component {
     };
   }
   getApiRequest() {
-    let { usr, pwd, boardID} = this.props;
+    let { boardID} = this.props;
     var chartType = 'velocity';
     var numSprint = '1';
     return {
       id:     `jira.board.${ boardID }.piechart`,
       params: {
-        usr:      usr,
-        pwd:      pwd,
         boardID:  boardID,
         type: chartType,
         numOfSprint: numSprint
@@ -44,7 +42,7 @@ class VelocityPieChart extends Component {
   }
   render() {
     let { labels, total }     = this.state;
-    let { usr,pwd,boardID} = this.props;
+    let { boardID} = this.props;
     //let flatLabels = _.values(labels);
     let data       = labels.map(label => {
       boardID = label.name;
@@ -67,8 +65,6 @@ class VelocityPieChart extends Component {
   }
 }
 VelocityPieChart.PropTypes = {
-  usr: PropTypes.string.isRequired,
-  pwd: PropTypes.string.isRequired,
   boardID: PropTypes.string.isRequired
 }
 reactMixin(VelocityPieChart.prototype, ListenerMixin);

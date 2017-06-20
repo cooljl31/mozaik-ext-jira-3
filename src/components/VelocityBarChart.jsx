@@ -10,13 +10,11 @@ class VelocityBarChart extends Component {
         this.state = { results: [] };
     }
     getApiRequest() {
-        let { usr, pwd, boardID, numOfSprint} = this.props;
+        let { boardID, numOfSprint} = this.props;
         var chartType = 'velocity';
         return {
             id:     `jira.board.${ boardID }.barchart`,
             params: {
-                usr:      usr,
-                pwd:      pwd,
                 boardID:  boardID,
                 numOfSprint: numOfSprint,
                 type: chartType
@@ -29,7 +27,7 @@ class VelocityBarChart extends Component {
         this.setState({ results: _.clone(results) });
     }
     render() {
-        let { usr,pwd,boardID, numOfSprint } = this.props;
+        let { boardID, numOfSprint } = this.props;
         let { results }            = this.state;
         var lastVelocity = 0;
         // converts to format required by BarChart component
@@ -70,8 +68,6 @@ class VelocityBarChart extends Component {
     }
 }
 VelocityBarChart.propTypes = {
-    usr:      PropTypes.string.isRequired,
-    pwd:      PropTypes.string.isRequired,
     boardID:  PropTypes.string.isRequired,
     numOfSprint: PropTypes.string.isRequired
 };

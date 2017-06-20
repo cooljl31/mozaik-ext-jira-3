@@ -20,11 +20,11 @@ const client = mozaik => {
       --wlast; // -1 if end with saturday
     return wfirst + days + wlast; // get the total
   };
-  const buildApiRequest = (path, user, pwd, params) =>{
+  const buildApiRequest = (path, params) =>{
     var basic_url = config.get('jira.host')+'rest/agile/';
     var api_version = 'latest';
     var urlStr = basic_url + api_version + '/'+path + '?maxResults=250';
-    var req = request.get(urlStr).auth(user, pwd);
+    var req = request.get(urlStr).auth(config.get('jira.username'), config.get('jira.password'));
     mozaik.logger.info('request sent to jira is :' + urlStr);
     return req.promise();
   };
@@ -102,7 +102,7 @@ const client = mozaik => {
   };
   const apiCalls = {
     board(params){
-      return buildApiRequest(`board/${ params.boardID }`, params.usr, params.pwd)
+      return buildApiRequest(`board/${ params.boardID }`)
         .then(function(res){
           mozaik.logger.info("the type of board "+params.boardID +" is:"+ res.body.type);
           if(res.body.type === "kanban"){
@@ -114,7 +114,7 @@ const client = mozaik => {
         });
     },
     kanban(params){
-      return buildApiRequest(`board/${ params.boardID }/issue`, params.usr, params.pwd)
+      return buildApiRequest(`board/${ params.boardID }/issue`)
         .then(function(res){
 
           //calculate date boundaries.
@@ -156,7 +156,7 @@ const client = mozaik => {
         });
     },
     sprints(params){
-      return buildApiRequest(`board/${ params.boardID }/sprint`, params.usr, params.pwd)
+      return buildApiRequest(`board/${ params.boardID }/sprint`)
         .then(function(res){
           var filterRes = [];
           var issues = res.body.values.map(function(sprint){
@@ -199,7 +199,7 @@ const client = mozaik => {
         });
     },
     issues(params){
-      return buildApiRequest(`board/${ params.boardID }/sprint/${ params.sprintID }/issue`, params.usr, params.pwd)
+      return buildApiRequest(`board/${ params.boardID }/sprint/${ params.sprintID }/issue`)
         .then(function(res){
           if(params.type === 'burndown'){
             return getBurnDown(res);

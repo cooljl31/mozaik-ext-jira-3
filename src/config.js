@@ -7,11 +7,23 @@ const config = convict({
       format: String,
       env: 'JIRA_API_BASE_URL'
     },
-    apiversion:{
+    jira_base_key:{
       doc: 'the version number of jira agile api',
       default:'1.0',
       format: String,
       env: 'JIRA_API_BASE_AUTH'
+    },
+    username:{
+      doc: 'the version number of jira agile api',
+      default:'1.0',
+      format: String,
+      env: 'USERNAME'
+    },
+    password:{
+      doc: 'the version number of jira agile api',
+      default:'1.0',
+      format: String,
+      env: 'PASSWORD'
     }
   }
 });
